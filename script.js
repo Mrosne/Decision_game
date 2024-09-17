@@ -24,7 +24,7 @@ document.getElementById("decideBtn").addEventListener("click", function () {
 
     // Sound alerts
     const tickSound = new Audio('tick.mp3');  // Sound when 3 seconds left
-    const selectSound = new Audio('select.mp3');  // Sound on selection
+    const selectSound = new Audio('select.wav');  // Sound on selection
 
     // Countdown timer
     const countdownInterval = setInterval(function () {

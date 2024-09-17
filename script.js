@@ -29,7 +29,7 @@ function startDecisionGame() {
     timerElement.innerText = `Time left: ${countdown} seconds`;
 
     // Sound alerts
-    const tickSound = new Audio('tick.mp3');  // Sound when 3 seconds left
+    const tickSound = new Audio('clock.wav');  // Sound when 3 seconds left
     const selectSound = new Audio('select.wav');  // Sound on selection
 
     // Countdown timer

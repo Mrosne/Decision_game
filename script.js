@@ -66,16 +66,7 @@ document.getElementById("decideBtn").addEventListener("click", function () {
         }
     });
 
-    // Function to restart the app after 3 seconds
-    function restartApp() {
-        setTimeout(function () {
-            document.getElementById("input1").value = "";
-            document.getElementById("input2").value = "";
-            document.getElementById("box-container").innerHTML = "";
-            document.getElementById("decision").innerText = "";
-            document.getElementById("timer").innerText = "";
-        }, 3000); // Restart after 3 seconds
-    }
+
 });
 // Function to get URL parameters
 function getURLParams() {

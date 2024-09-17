@@ -6,7 +6,8 @@ document.getElementById("decideBtn").addEventListener("click", function () {
 function startDecisionGame() {
     const input1 = document.getElementById("input1").value;
     const input2 = document.getElementById("input2").value;
-
+    tickSound.play;
+    
     if (input1 === "" || input2 === "") {
         alert("Please enter both options.");
         return;

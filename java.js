@@ -107,8 +107,11 @@ document.getElementById("shareBtn").addEventListener("click", function () {
         return;
     }
 
+    // Replace with your website's base URL
+    const baseURL = "https://mrosne.github.io/Decision_game/";
+
     // Create shareable URL with query parameters
-    const shareURL = `${window.location.origin}${window.location.pathname}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}`;
+    const shareURL = `${baseURL}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}`;
 
     // Copy URL to clipboard
     navigator.clipboard.writeText(shareURL).then(() => {
@@ -117,4 +120,3 @@ document.getElementById("shareBtn").addEventListener("click", function () {
         alert("Failed to copy the URL: " + err);
     });
 });
-

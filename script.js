@@ -1,4 +1,9 @@
 document.getElementById("decideBtn").addEventListener("click", function () {
+    startDecisionGame();
+});
+
+// Function to start the decision game (decide button functionality)
+function startDecisionGame() {
     const input1 = document.getElementById("input1").value;
     const input2 = document.getElementById("input2").value;
 
@@ -65,19 +70,19 @@ document.getElementById("decideBtn").addEventListener("click", function () {
             restartApp();
         }
     });
+}
 
-
-});
 // Function to get URL parameters
 function getURLParams() {
     const params = new URLSearchParams(window.location.search);
     return {
         input1: params.get("input1") || "",
-        input2: params.get("input2") || ""
+        input2: params.get("input2") || "",
+        start: params.get("start") || ""
     };
 }
 
-// Populate input fields if URL has query parameters
+// Populate input fields if URL has query parameters and optionally start the timer
 window.onload = function () {
     const params = getURLParams();
     if (params.input1) {
@@ -85,6 +90,11 @@ window.onload = function () {
     }
     if (params.input2) {
         document.getElementById("input2").value = params.input2;
+    }
+
+    // Automatically start the game if "start=true" is in the URL
+    if (params.start === "true") {
+        startDecisionGame();
     }
 };
 
@@ -102,7 +112,7 @@ document.getElementById("shareBtn").addEventListener("click", function () {
     const baseURL = "https://mrosne.github.io/Decision_game/";
 
     // Create shareable URL with query parameters
-    const shareURL = `${baseURL}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}`;
+    const shareURL = `${baseURL}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}&start=true`;
 
     // Copy URL to clipboard
     navigator.clipboard.writeText(shareURL).then(() => {

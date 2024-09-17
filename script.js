@@ -38,7 +38,7 @@ function startDecisionGame() {
         timerElement.innerText = `Time left: ${countdown} seconds`;
 
         // Play tick sound at 3 seconds
-        if (countdown === 3) {
+        if (countdown === 10) {
             tickSound.play();
         }
 

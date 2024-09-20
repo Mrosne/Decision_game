@@ -1,7 +1,34 @@
-document.getElementById("decideBtn").addEventListener("click", function () {
-    startDecisionGame();
-});
+// Function to get URL parameters
+function getURLParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        input1: params.get("input1") || "",
+        input2: params.get("input2") || "",
+        start: params.get("start") || ""
+    };
+}
 
+// Populate input fields if URL has query parameters and optionally start the timer
+window.onload = function () {
+    const params = getURLParams();
+    const input1Element = document.getElementById("input1");
+    const input2Element = document.getElementById("input2");
+
+    // Populate input fields with values from the URL parameters
+    if (params.input1) {
+        input1Element.value = params.input1;
+    }
+    if (params.input2) {
+        input2Element.value = params.input2;
+    }
+
+    // Automatically start the game if "start=true" is in the URL
+    if (params.start === "true") {
+        startDecisionGame();
+    }
+};
+
+// Start the decision game (decide button functionality)
 function startDecisionGame() {
     const input1 = document.getElementById("input1").value;
     const input2 = document.getElementById("input2").value;
@@ -67,22 +94,3 @@ function restartApp() {
     document.getElementById("timer").innerText = "";
     document.getElementById("decision").innerText = "";
 }
-
-document.getElementById("shareBtn").addEventListener("click", function () {
-    const input1 = document.getElementById("input1").value;
-    const input2 = document.getElementById("input2").value;
-
-    if (input1 === "" || input2 === "") {
-        alert("Please enter both options to share.");
-        return;
-    }
-
-    const baseURL = "https://mrosne.github.io/Decision_game/";
-    const shareURL = `${baseURL}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}&start=true`;
-
-    navigator.clipboard.writeText(shareURL).then(() => {
-        alert("Shareable URL copied to clipboard!");
-    }).catch(err => {
-        alert("Failed to copy the URL: " + err);
-    });
-});

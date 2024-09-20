@@ -1,13 +1,8 @@
-document.getElementById("decideBtn").addEventListener("click", function () {
-    startDecisionGame();
-});
-
 // Function to start the decision game (decide button functionality)
 function startDecisionGame() {
     const input1 = document.getElementById("input1").value;
     const input2 = document.getElementById("input2").value;
 
-    
     if (input1 === "" || input2 === "") {
         alert("Please enter both options.");
         return;
@@ -32,12 +27,17 @@ function startDecisionGame() {
     const tickSound = new Audio('clock.wav');  // Sound when 3 seconds left
     const selectSound = new Audio('select.wav');  // Sound on selection
 
+    // Display and play the video when the timer starts
+    const videoElement = document.getElementById("timerVideo");
+    videoElement.style.display = "block";  // Show the video element
+    videoElement.play();  // Start playing the video
+
     // Countdown timer
     const countdownInterval = setInterval(function () {
         countdown--;
         timerElement.innerText = `Time left: ${countdown} seconds`;
 
-        // Play tick sound at 3 seconds
+        // Play tick sound at 9 seconds
         if (countdown === 9) {
             tickSound.play();
         }
@@ -58,6 +58,7 @@ function startDecisionGame() {
             document.getElementById("decision").innerText = `Chosen: ${input1}`;
             selectSound.play();  // Play sound on selection
             clearInterval(countdownInterval);
+            videoElement.pause();  // Pause the video when a selection is made
             restartApp();
         }
     });
@@ -68,57 +69,8 @@ function startDecisionGame() {
             document.getElementById("decision").innerText = `Chosen: ${input2}`;
             selectSound.play();  // Play sound on selection
             clearInterval(countdownInterval);
+            videoElement.pause();  // Pause the video when a selection is made
             restartApp();
         }
     });
 }
-
-// Function to get URL parameters
-function getURLParams() {
-    const params = new URLSearchParams(window.location.search);
-    return {
-        input1: params.get("input1") || "",
-        input2: params.get("input2") || "",
-        start: params.get("start") || ""
-    };
-}
-
-// Populate input fields if URL has query parameters and optionally start the timer
-window.onload = function () {
-    const params = getURLParams();
-    if (params.input1) {
-        document.getElementById("input1").value = params.input1;
-    }
-    if (params.input2) {
-        document.getElementById("input2").value = params.input2;
-    }
-
-    // Automatically start the game if "start=true" is in the URL
-    if (params.start === "true") {
-        startDecisionGame();
-    }
-};
-
-// Share URL button functionality
-document.getElementById("shareBtn").addEventListener("click", function () {
-    const input1 = document.getElementById("input1").value;
-    const input2 = document.getElementById("input2").value;
-
-    if (input1 === "" || input2 === "") {
-        alert("Please enter both options to share.");
-        return;
-    }
-
-    // Replace with your website's base URL
-    const baseURL = "https://mrosne.github.io/Decision_game/";
-
-    // Create shareable URL with query parameters
-    const shareURL = `${baseURL}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}&start=true`;
-
-    // Copy URL to clipboard
-    navigator.clipboard.writeText(shareURL).then(() => {
-        alert("Shareable URL copied to clipboard!");
-    }).catch(err => {
-        alert("Failed to copy the URL: " + err);
-    });
-});

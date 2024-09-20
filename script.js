@@ -27,10 +27,9 @@ function startDecisionGame() {
     const tickSound = new Audio('clock.wav');  // Sound when 3 seconds left
     const selectSound = new Audio('select.wav');  // Sound on selection
 
-    // Get the video element and show it
-    const videoElement = document.getElementById("timerVideo");
-    videoElement.style.display = "block";  // Make the video visible
-    videoElement.play();  // Start playing the video
+    // Show the GIF when the timer starts
+    const gifElement = document.getElementById("timerGif");
+    gifElement.style.display = "block";  // Make the GIF visible
 
     // Countdown timer
     const countdownInterval = setInterval(function () {
@@ -44,7 +43,7 @@ function startDecisionGame() {
 
         if (countdown <= 0) {
             clearInterval(countdownInterval);
-            videoElement.pause(); // Pause the video when the timer ends
+            gifElement.style.display = "none";  // Hide the GIF when the timer ends
             if (!document.querySelector(".selected")) {
                 document.getElementById("decision").innerText = "Time's up! No selection was made.";
             }
@@ -59,7 +58,7 @@ function startDecisionGame() {
             document.getElementById("decision").innerText = `Chosen: ${input1}`;
             selectSound.play();  // Play sound on selection
             clearInterval(countdownInterval);
-            videoElement.pause();  // Pause the video on selection
+            gifElement.style.display = "none";  // Hide the GIF when a selection is made
             restartApp();
         }
     });
@@ -70,7 +69,7 @@ function startDecisionGame() {
             document.getElementById("decision").innerText = `Chosen: ${input2}`;
             selectSound.play();  // Play sound on selection
             clearInterval(countdownInterval);
-            videoElement.pause();  // Pause the video on selection
+            gifElement.style.display = "none";  // Hide the GIF when a selection is made
             restartApp();
         }
     });

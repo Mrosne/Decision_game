@@ -1,4 +1,8 @@
-// Function to start the decision game (decide button functionality)
+document.getElementById("decideBtn").addEventListener("click", function () {
+    startDecisionGame();
+});
+
+// Function to start the decision game
 function startDecisionGame() {
     const input1 = document.getElementById("input1").value;
     const input2 = document.getElementById("input2").value;
@@ -23,10 +27,6 @@ function startDecisionGame() {
     const timerElement = document.getElementById("timer");
     timerElement.innerText = `Time left: ${countdown} seconds`;
 
-    // Sound alerts
-    const tickSound = new Audio('clock.wav');  // Sound when 3 seconds left
-    const selectSound = new Audio('select.wav');  // Sound on selection
-
     // Show the GIF when the timer starts
     const gifElement = document.getElementById("timerGif");
     gifElement.style.display = "block";  // Make the GIF visible
@@ -35,11 +35,6 @@ function startDecisionGame() {
     const countdownInterval = setInterval(function () {
         countdown--;
         timerElement.innerText = `Time left: ${countdown} seconds`;
-
-        // Play tick sound at 9 seconds
-        if (countdown === 9) {
-            tickSound.play();
-        }
 
         if (countdown <= 0) {
             clearInterval(countdownInterval);
@@ -56,7 +51,6 @@ function startDecisionGame() {
         if (!document.querySelector(".selected")) {
             this.classList.add("selected");
             document.getElementById("decision").innerText = `Chosen: ${input1}`;
-            selectSound.play();  // Play sound on selection
             clearInterval(countdownInterval);
             gifElement.style.display = "none";  // Hide the GIF when a selection is made
             restartApp();
@@ -67,10 +61,18 @@ function startDecisionGame() {
         if (!document.querySelector(".selected")) {
             this.classList.add("selected");
             document.getElementById("decision").innerText = `Chosen: ${input2}`;
-            selectSound.play();  // Play sound on selection
             clearInterval(countdownInterval);
             gifElement.style.display = "none";  // Hide the GIF when a selection is made
             restartApp();
         }
     });
+}
+
+// Function to restart the app (clears inputs and resets)
+function restartApp() {
+    document.getElementById("input1").value = "";
+    document.getElementById("input2").value = "";
+    document.getElementById("box-container").innerHTML = "";
+    document.getElementById("timer").innerText = "";
+    document.getElementById("decision").innerText = "";
 }

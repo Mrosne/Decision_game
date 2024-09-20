@@ -104,8 +104,9 @@ button:hover {
 
 /* GIF styling */
 #timerGif {
-    margin-top: 20px;
-    width: 640px;    /* Adjust the width of the GIF */
-    height: auto;    /* Maintain aspect ratio */
-    display: none;   /* Initially hidden */
+    margin: 20px auto; /* Center it horizontally */
+    width: 320px;      /* Adjust the width of the GIF */
+    height: 420px;      /* Maintain aspect ratio */
+    display: none;     /* Initially hidden */
+    max-width: 100%;   /* Ensure it doesn't overflow the container */
 }

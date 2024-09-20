@@ -113,7 +113,10 @@ button:hover {
     transition: opacity 0.5s ease; /* Smooth transition when video appears */
 }
 
-#timerVideo.show {
-    display: block; /* Show video when needed */
-    opacity: 1;     /* Fade-in effect */
+#timerVideo {
+    width: 640px;    /* Adjust the width of the video */
+    height: 360px;   /* Adjust the height of the video */
+    border: 3px solid #4CAF50;
+    display: none;   /* Hide by default */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
 }

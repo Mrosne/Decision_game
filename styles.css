@@ -102,21 +102,10 @@ button:hover {
     color: white;
 }
 
-/* Video styling */
-#timerVideo {
+/* GIF styling */
+#timerGif {
     margin-top: 20px;
-    width: 640px;    /* Adjust the width of the video */
-    height: 360px;   /* Adjust the height of the video */
-    border: 3px solid #4CAF50; /* Add a green border to the video */
-    display: none;   /* Initially hidden, shown when the game starts */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
-    transition: opacity 0.5s ease; /* Smooth transition when video appears */
-}
-
-#timerVideo {
-    width: 640px;    /* Adjust the width of the video */
-    height: 360px;   /* Adjust the height of the video */
-    border: 3px solid #4CAF50;
-    display: none;   /* Hide by default */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+    width: 640px;    /* Adjust the width of the GIF */
+    height: auto;    /* Maintain aspect ratio */
+    display: none;   /* Initially hidden */
 }

@@ -2,7 +2,6 @@ document.getElementById("decideBtn").addEventListener("click", function () {
     startDecisionGame();
 });
 
-// Function to start the decision game
 function startDecisionGame() {
     const input1 = document.getElementById("input1").value;
     const input2 = document.getElementById("input2").value;
@@ -27,18 +26,16 @@ function startDecisionGame() {
     const timerElement = document.getElementById("timer");
     timerElement.innerText = `Time left: ${countdown} seconds`;
 
-    // Show the GIF when the timer starts
     const gifElement = document.getElementById("timerGif");
-    gifElement.style.display = "block";  // Make the GIF visible
+    gifElement.style.display = "block"; // Show the GIF
 
-    // Countdown timer
     const countdownInterval = setInterval(function () {
         countdown--;
         timerElement.innerText = `Time left: ${countdown} seconds`;
 
         if (countdown <= 0) {
             clearInterval(countdownInterval);
-            gifElement.style.display = "none";  // Hide the GIF when the timer ends
+            gifElement.style.display = "none"; // Hide the GIF
             if (!document.querySelector(".selected")) {
                 document.getElementById("decision").innerText = "Time's up! No selection was made.";
             }
@@ -48,27 +45,21 @@ function startDecisionGame() {
 
     // Add event listeners to boxes
     document.getElementById("box1").addEventListener("click", function () {
-        if (!document.querySelector(".selected")) {
-            this.classList.add("selected");
-            document.getElementById("decision").innerText = `Chosen: ${input1}`;
-            clearInterval(countdownInterval);
-            gifElement.style.display = "none";  // Hide the GIF when a selection is made
-            restartApp();
-        }
+        selectOption(input1);
     });
 
     document.getElementById("box2").addEventListener("click", function () {
-        if (!document.querySelector(".selected")) {
-            this.classList.add("selected");
-            document.getElementById("decision").innerText = `Chosen: ${input2}`;
-            clearInterval(countdownInterval);
-            gifElement.style.display = "none";  // Hide the GIF when a selection is made
-            restartApp();
-        }
+        selectOption(input2);
     });
 }
 
-// Function to restart the app (clears inputs and resets)
+function selectOption(selectedInput) {
+    document.getElementById("decision").innerText = `Chosen: ${selectedInput}`;
+    clearInterval(countdownInterval);
+    document.getElementById("timerGif").style.display = "none"; // Hide the GIF
+    restartApp();
+}
+
 function restartApp() {
     document.getElementById("input1").value = "";
     document.getElementById("input2").value = "";
@@ -76,3 +67,22 @@ function restartApp() {
     document.getElementById("timer").innerText = "";
     document.getElementById("decision").innerText = "";
 }
+
+document.getElementById("shareBtn").addEventListener("click", function () {
+    const input1 = document.getElementById("input1").value;
+    const input2 = document.getElementById("input2").value;
+
+    if (input1 === "" || input2 === "") {
+        alert("Please enter both options to share.");
+        return;
+    }
+
+    const baseURL = "https://mrosne.github.io/Decision_game/";
+    const shareURL = `${baseURL}?input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}&start=true`;
+
+    navigator.clipboard.writeText(shareURL).then(() => {
+        alert("Shareable URL copied to clipboard!");
+    }).catch(err => {
+        alert("Failed to copy the URL: " + err);
+    });
+});

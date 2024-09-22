@@ -2,43 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decision Game</title>
+    <!-- Viewport meta tag for mobile scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
         <h1>Decision Game</h1>
-        <div id="input-container">
-            <div id="inputs">
-                <input type="text" id="option1" placeholder="Enter first option">
-                <input type="text" id="option2" placeholder="Enter second option">
+        <div id="content-container">
+            <div id="input-container">
+                <div id="inputs">
+                    <input type="text" id="option1" placeholder="Enter first option">
+                    <input type="text" id="option2" placeholder="Enter second option">
+                </div>
+                <button id="decide-button">Decide!</button>
+                <div id="share-container" style="display: none;">
+                    <button id="copy-link">Copy Link</button>
+                    <a href="#" id="whatsapp-share">WhatsApp</a>
+                    <a href="#" id="email-share">Email</a>
+                </div>
             </div>
-            <button id="decide-button">Decide!</button>
-            <div id="share-container" style="display: none;">
-                <button id="copy-link">Copy Link</button>
-                <a href="#" id="whatsapp-share">WhatsApp</a>
-                <a href="#" id="email-share">Email</a>
+            <div id="error-message"></div>
+            <div id="instructions-container" style="display: none;">
+                <p id="instructions-text"></p>
+                <button id="start-button">Decide!</button>
             </div>
-        </div>
-        <div id="error-message"></div>
-        <div id="instructions-container" style="display: none;">
-            <p id="instructions-text"></p>
-            <button id="start-button">Decide!</button>
-        </div>
-        <div id="timer-container" style="display: none;">
-            <span id="timer">10</span> seconds left
-        </div>
-        <div id="options-container">
-            <!-- Option buttons will appear here -->
-        </div>
-        <div id="kot-container">
-            <!-- kot.gif will be displayed here -->
-        </div>
-        <div id="message-container"></div>
-        <div id="buttons-container" style="display: none;">
-            <button id="reset-button">Play Again</button>
-            <button id="new-game-button">New Game</button>
+            <div id="timer-container" style="display: none;">
+                <span id="timer">10</span> seconds left
+            </div>
+            <div id="options-container">
+                <!-- Option buttons will appear here -->
+            </div>
+            <div id="kot-container">
+                <!-- kot.gif will be displayed here -->
+            </div>
+            <div id="message-container"></div>
+            <div id="buttons-container" style="display: none;">
+                <button id="reset-button">Play Again</button>
+                <button id="new-game-button">New Game</button>
+            </div>
         </div>
     </div>
 

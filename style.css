@@ -1,58 +1,73 @@
 /* style.css */
 
-body {
+/* Reset margins and paddings */
+* {
     margin: 0;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(90deg, #1e3c72, #2a5298); /* Modern blue gradient */
-    color: #fff;
-    overflow: hidden; /* Prevent scrolling */
-}
-
-#game-container {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    color: #fff;
+    overflow: hidden; /* Prevent scrolling */
+    width: 100%;
+    height: 100vh; /* Set body height to viewport height */
+}
+
+#game-container {
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
 h1 {
-    font-size: 3em;
+    font-size: 4vw; /* Responsive font size */
     margin-bottom: 20px;
+    text-align: center;
 }
 
 #input-container {
-    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #inputs {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
     margin-bottom: 20px;
 }
 
 #inputs input {
-    width: 45%;
+    width: 40%;
     padding: 10px;
-    margin: 0 2.5%;
-    font-size: 1.2em;
+    font-size: 4vw; /* Responsive font size */
     border: none;
     border-radius: 30px;
     background-color: #f0f0f0;
     color: #333;
+    text-align: center;
 }
 
 #decide-button {
     padding: 15px 30px;
-    font-size: 1.5em;
+    font-size: 5vw; /* Responsive font size */
     background-color: #ff7e5f;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     color: #fff;
     margin-bottom: 20px;
+    width: 80%;
+    max-width: 300px;
 }
 
 #decide-button:hover {
@@ -60,13 +75,16 @@ h1 {
 }
 
 #share-container {
-    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 #share-container button,
 #share-container a {
     padding: 10px 20px;
-    font-size: 1em;
+    font-size: 4vw; /* Responsive font size */
     background-color: #24c6dc;
     border: none;
     border-radius: 20px;
@@ -81,38 +99,34 @@ h1 {
     background-color: #20b0c5;
 }
 
-#share-container a {
-    display: inline-block;
-}
-
-#share-container button {
-    display: inline-block;
-}
-
 #error-message {
     color: #ff6b6b;
     margin-bottom: 20px;
-    font-size: 1.2em;
+    font-size: 4vw; /* Responsive font size */
+    text-align: center;
 }
 
 #instructions-container {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 #instructions-text {
-    font-size: 1.5em;
+    font-size: 4vw; /* Responsive font size */
     margin-bottom: 20px;
     line-height: 1.5;
 }
 
 #start-button {
     padding: 15px 30px;
-    font-size: 1.5em;
+    font-size: 5vw; /* Responsive font size */
     background-color: #ff7e5f;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     color: #fff;
+    width: 80%;
+    max-width: 300px;
 }
 
 #start-button:hover {
@@ -120,40 +134,42 @@ h1 {
 }
 
 #timer-container {
-    font-size: 2em;
+    font-size: 5vw; /* Responsive font size */
     margin-bottom: 20px;
+    text-align: center;
 }
 
 #options-container {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
+    width: 100%;
 }
 
-/* Option Buttons Styling */
 #options-container button {
-    padding: 15px 30px;
+    padding: 15px 10px;
     margin: 10px;
-    font-size: 1.2em;
+    font-size: 4vw; /* Responsive font size */
     border: none;
     border-radius: 30px;
     cursor: pointer;
     color: #fff;
     width: 40%;
+    max-width: 150px;
+    text-align: center;
 }
 
-/* First Option Button */
 #options-container button:first-child {
-    background-color: #ff8c00; /* Dark Orange */
+    background-color: #ff8c00;
 }
 
 #options-container button:first-child:hover {
     background-color: #e07b00;
 }
 
-/* Second Option Button */
 #options-container button:last-child {
-    background-color: #32cd32; /* Lime Green */
+    background-color: #32cd32;
 }
 
 #options-container button:last-child:hover {
@@ -161,29 +177,36 @@ h1 {
 }
 
 #kot-container img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
     margin-top: 20px;
 }
 
 #message-container {
     margin-top: 20px;
-    font-size: 1.8em;
+    font-size: 5vw; /* Responsive font size */
+    text-align: center;
 }
 
 #buttons-container {
     margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 #buttons-container button {
     padding: 10px 25px;
-    font-size: 1.2em;
+    font-size: 4vw; /* Responsive font size */
     background-color: #ff7e5f;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     color: #fff;
     margin: 10px;
+    width: 40%;
+    max-width: 150px;
+    text-align: center;
 }
 
 #buttons-container button:hover {
@@ -191,19 +214,34 @@ h1 {
 }
 
 @media screen and (max-width: 600px) {
-    #inputs {
-        flex-direction: column;
-        align-items: stretch;
+    /* Adjust font sizes and element sizes for mobile */
+    h1 {
+        font-size: 6vw;
     }
 
     #inputs input {
         width: 80%;
-        margin: 10px auto;
+        margin: 10px 0;
+        font-size: 6vw;
     }
 
     #decide-button,
     #start-button {
         width: 80%;
+        font-size: 6vw;
+    }
+
+    #share-container button,
+    #share-container a {
+        width: 80%;
+        font-size: 5vw;
+    }
+
+    #instructions-text,
+    #error-message,
+    #timer-container,
+    #message-container {
+        font-size: 5vw;
     }
 
     #options-container {
@@ -212,27 +250,17 @@ h1 {
 
     #options-container button {
         width: 80%;
-        margin: 10px auto;
+        margin: 10px 0;
+        font-size: 5vw;
     }
 
-    #share-container {
-        display: flex;
+    #buttons-container {
         flex-direction: column;
-        align-items: center;
     }
 
-    #share-container button,
-    #share-container a {
+    #buttons-container button {
         width: 80%;
-        margin: 5px auto;
-        text-align: center;
-    }
-
-    #instructions-text {
-        font-size: 1.2em;
-    }
-
-    h1 {
-        font-size: 2em;
+        margin: 10px 0;
+        font-size: 5vw;
     }
 }

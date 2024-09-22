@@ -1,0 +1,91 @@
+/* style.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    color: #333;
+}
+
+#game-container {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #555;
+}
+
+#input-container {
+    margin-bottom: 20px;
+}
+
+#input-container input {
+    width: 40%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#decide-button, #reset-button, #copy-link {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #ffb6c1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#decide-button:hover, #reset-button:hover, #copy-link:hover {
+    background-color: #ffa6b1;
+}
+
+#error-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+#timer-container {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#options-container button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1em;
+    background-color: #add8e6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#options-container button:hover {
+    background-color: #9cc8d6;
+}
+
+#kot-container img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+#share-container {
+    margin-top: 20px;
+}
+
+#share-container a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #555;
+}
+
+#share-container a:hover {
+    text-decoration: underline;
+}

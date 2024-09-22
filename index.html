@@ -14,11 +14,15 @@
             <button id="decide-button">Decide!</button>
             <div id="share-container" style="display: none;">
                 <button id="copy-link">Copy Link</button>
-                <a href="#" id="whatsapp-share">Share on WhatsApp</a>
-                <a href="#" id="email-share">Share via Email</a>
+                <a href="#" id="whatsapp-share">WhatsApp</a>
+                <a href="#" id="email-share">Email</a>
             </div>
         </div>
         <div id="error-message"></div>
+        <div id="instructions-container" style="display: none;">
+            <p id="instructions-text"></p>
+            <button id="start-button">Decide!</button>
+        </div>
         <div id="timer-container" style="display: none;">
             <span id="timer">10</span> seconds left
         </div>
@@ -29,7 +33,10 @@
             <!-- kot.gif will be displayed here -->
         </div>
         <div id="message-container"></div>
-        <button id="reset-button" style="display: none;">Reset</button>
+        <div id="buttons-container" style="display: none;">
+            <button id="reset-button">Play Again</button>
+            <button id="new-game-button">New Game</button>
+        </div>
     </div>
 
     <!-- Audio files -->

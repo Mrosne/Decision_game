@@ -43,10 +43,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Show instructions
         instructionsContainer.style.display = 'block';
-        instructionsText.innerHTML = `You need to choose between <strong>${paramOption1}</strong> or <strong>${paramOption2}</strong>. You will have 10 seconds.`;
+        instructionsText.innerHTML = `<p>You need to choose between</p>
+                                      <p><strong>${paramOption1}</strong> or <strong>${paramOption2}</strong></p>
+                                      <p>You will have 10 seconds.</p>`;
 
         // Start game when user clicks 'Decide!' button
-        startButton.addEventListener('click', startGame);
+        startButton.addEventListener('click', function() {
+            // Animate transition
+            instructionsContainer.style.transition = 'opacity 0.5s';
+            instructionsContainer.style.opacity = '0';
+            setTimeout(function() {
+                instructionsContainer.style.display = 'none';
+                startGame();
+            }, 500);
+        });
     } else {
         decideButton.addEventListener('click', function() {
             if (option1Input.value.trim() === '' || option2Input.value.trim() === '') {
@@ -142,6 +152,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         optionsContainer.appendChild(option1Button);
         optionsContainer.appendChild(option2Button);
+
+        // Animate options appearance
+        optionsContainer.style.opacity = '0';
+        optionsContainer.style.transition = 'opacity 0.5s';
+        setTimeout(function() {
+            optionsContainer.style.opacity = '1';
+        }, 100);
 
         // Display 'kot.gif'
         kotContainer.innerHTML = ''; // Clear previous image

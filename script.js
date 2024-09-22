@@ -12,11 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const clockAudio = document.getElementById('clock-audio');
     const selectAudio = document.getElementById('select-audio');
     const resetButton = document.getElementById('reset-button');
+    const newGameButton = document.getElementById('new-game-button');
     const shareContainer = document.getElementById('share-container');
     const copyLinkButton = document.getElementById('copy-link');
     const whatsappShare = document.getElementById('whatsapp-share');
     const emailShare = document.getElementById('email-share');
     const messageContainer = document.getElementById('message-container');
+    const instructionsContainer = document.getElementById('instructions-container');
+    const instructionsText = document.getElementById('instructions-text');
+    const startButton = document.getElementById('start-button');
+    const buttonsContainer = document.getElementById('buttons-container');
 
     let countdownInterval;
 
@@ -31,7 +36,26 @@ document.addEventListener('DOMContentLoaded', function() {
         option1Input.value = paramOption1;
         option2Input.value = paramOption2;
         checkInputs();
-        startGame();
+
+        // Hide input container and decide button
+        document.getElementById('input-container').style.display = 'none';
+        decideButton.style.display = 'none';
+
+        // Show instructions
+        instructionsContainer.style.display = 'block';
+        instructionsText.innerHTML = `You need to choose between <strong>${paramOption1}</strong> or <strong>${paramOption2}</strong>. You will have 10 seconds.`;
+
+        // Start game when user clicks 'Decide!' button
+        startButton.addEventListener('click', startGame);
+    } else {
+        decideButton.addEventListener('click', function() {
+            if (option1Input.value.trim() === '' || option2Input.value.trim() === '') {
+                errorMessage.textContent = 'Please enter both options.';
+            } else {
+                errorMessage.textContent = '';
+                startGame();
+            }
+        });
     }
 
     // Check inputs on every input event
@@ -64,22 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    decideButton.addEventListener('click', function() {
-        if (option1Input.value.trim() === '' || option2Input.value.trim() === '') {
-            errorMessage.textContent = 'Please enter both options.';
-        } else {
-            errorMessage.textContent = '';
-            startGame();
-        }
-    });
-
     function startGame() {
         // Hide input fields and decide button
         document.getElementById('input-container').style.display = 'none';
         decideButton.style.display = 'none';
 
-        // Hide share container
+        // Hide share container and instructions
         shareContainer.style.display = 'none';
+        instructionsContainer.style.display = 'none';
 
         // Show timer
         timerContainer.style.display = 'block';
@@ -112,12 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     button.disabled = true;
                 });
 
-                // Show reset button
-                resetButton.style.display = 'inline-block';
+                // Show buttons container
+                buttonsContainer.style.display = 'block';
             }
         }, 1000);
 
         // Display options as buttons
+        optionsContainer.innerHTML = ''; // Clear previous options
         const option1Button = document.createElement('button');
         option1Button.textContent = option1Input.value;
         const option2Button = document.createElement('button');
@@ -127,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         optionsContainer.appendChild(option2Button);
 
         // Display 'kot.gif'
+        kotContainer.innerHTML = ''; // Clear previous image
         const kotImage = document.createElement('img');
         kotImage.src = 'kot.gif';
         kotContainer.appendChild(kotImage);
@@ -157,13 +175,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display congratulations message
         messageContainer.innerHTML = '<h2>Congratulations on making a decision!</h2>';
 
-        // Show reset button
-        resetButton.style.display = 'inline-block';
+        // Show buttons container
+        buttonsContainer.style.display = 'block';
     }
 
     resetButton.addEventListener('click', function() {
-        // Reset the game
-        location.reload();
+        // Restart the game with the same inputs
+        messageContainer.innerHTML = '';
+        optionsContainer.innerHTML = '';
+        buttonsContainer.style.display = 'none';
+        startGame();
+    });
+
+    newGameButton.addEventListener('click', function() {
+        // Start a new game
+        location.href = baseUrl;
     });
 
     // Initial check to display share options if inputs are pre-filled

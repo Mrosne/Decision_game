@@ -1,96 +1,131 @@
-// Function to get URL parameters
-function getURLParams() {
-    const params = new URLSearchParams(window.location.search);
-    return {
-        input1: params.get("input1") || "",
-        input2: params.get("input2") || "",
-        start: params.get("start") || ""
-    };
-}
+// script.js
 
-// Populate input fields if URL has query parameters and optionally start the timer
-window.onload = function () {
-    const params = getURLParams();
-    const input1Element = document.getElementById("input1");
-    const input2Element = document.getElementById("input2");
+document.addEventListener('DOMContentLoaded', function() {
+    const decideButton = document.getElementById('decide-button');
+    const option1Input = document.getElementById('option1');
+    const option2Input = document.getElementById('option2');
+    const errorMessage = document.getElementById('error-message');
+    const timerContainer = document.getElementById('timer-container');
+    const timerSpan = document.getElementById('timer');
+    const optionsContainer = document.getElementById('options-container');
+    const kotContainer = document.getElementById('kot-container');
+    const clockAudio = document.getElementById('clock-audio');
+    const selectAudio = document.getElementById('select-audio');
+    const resetButton = document.getElementById('reset-button');
+    const shareContainer = document.getElementById('share-container');
+    const copyLinkButton = document.getElementById('copy-link');
+    const whatsappShare = document.getElementById('whatsapp-share');
+    const emailShare = document.getElementById('email-share');
 
-    // Populate input fields with values from the URL parameters
-    if (params.input1) {
-        input1Element.value = params.input1;
-    }
-    if (params.input2) {
-        input2Element.value = params.input2;
-    }
+    let countdownInterval;
 
-    // Automatically start the game if "start=true" is in the URL
-    if (params.start === "true") {
-        startDecisionGame();
-    }
-};
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramOption1 = urlParams.get('option1');
+    const paramOption2 = urlParams.get('option2');
 
-// Start the decision game (decide button functionality)
-function startDecisionGame() {
-    const input1 = document.getElementById("input1").value;
-    const input2 = document.getElementById("input2").value;
-
-    if (input1 === "" || input2 === "") {
-        alert("Please enter both options.");
-        return;
+    if (paramOption1 && paramOption2) {
+        option1Input.value = paramOption1;
+        option2Input.value = paramOption2;
+        startGame();
     }
 
-    // Clear previous decision and timer
-    document.getElementById("decision").innerText = "";
-    document.getElementById("timer").innerText = "";
-
-    // Generate boxes with the inputs
-    const boxContainer = document.getElementById("box-container");
-    boxContainer.innerHTML = `
-        <div class="box" id="box1">${input1}</div>
-        <div class="box" id="box2">${input2}</div>
-    `;
-
-    let countdown = 10;
-    const timerElement = document.getElementById("timer");
-    timerElement.innerText = `Time left: ${countdown} seconds`;
-
-    const gifElement = document.getElementById("timerGif");
-    gifElement.style.display = "block"; // Show the GIF
-
-    const countdownInterval = setInterval(function () {
-        countdown--;
-        timerElement.innerText = `Time left: ${countdown} seconds`;
-
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-            gifElement.style.display = "none"; // Hide the GIF
-            if (!document.querySelector(".selected")) {
-                document.getElementById("decision").innerText = "Time's up! No selection was made.";
-            }
-            restartApp();
+    decideButton.addEventListener('click', function() {
+        if (option1Input.value.trim() === '' || option2Input.value.trim() === '') {
+            errorMessage.textContent = 'Please enter both options.';
+        } else {
+            errorMessage.textContent = '';
+            startGame();
         }
-    }, 1000);
-
-    // Add event listeners to boxes
-    document.getElementById("box1").addEventListener("click", function () {
-        selectOption(input1);
     });
 
-    document.getElementById("box2").addEventListener("click", function () {
-        selectOption(input2);
+    function startGame() {
+        // Hide input fields and decide button
+        document.getElementById('input-container').style.display = 'none';
+        decideButton.style.display = 'none';
+
+        // Show share container
+        shareContainer.style.display = 'block';
+
+        // Show timer
+        timerContainer.style.display = 'block';
+        timerSpan.textContent = '10';
+
+        // Play clock audio
+        clockAudio.play();
+
+        // Start countdown
+        let timeLeft = 10;
+        countdownInterval = setInterval(function() {
+            timeLeft--;
+            timerSpan.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                clockAudio.pause();
+                clockAudio.currentTime = 0;
+                // Time's up, you can handle this if needed
+            }
+        }, 1000);
+
+        // Display options as buttons
+        const option1Button = document.createElement('button');
+        option1Button.textContent = option1Input.value;
+        const option2Button = document.createElement('button');
+        option2Button.textContent = option2Input.value;
+
+        optionsContainer.appendChild(option1Button);
+        optionsContainer.appendChild(option2Button);
+
+        // Display 'kot.gif'
+        const kotImage = document.createElement('img');
+        kotImage.src = 'kot.gif';
+        kotContainer.appendChild(kotImage);
+
+        // Add event listeners to options
+        option1Button.addEventListener('click', makeSelection);
+        option2Button.addEventListener('click', makeSelection);
+
+        // Prepare share link
+        const baseUrl = 'https://mrosne.github.io/Decision_game/';
+        const shareUrl = `${baseUrl}?option1=${encodeURIComponent(option1Input.value)}&option2=${encodeURIComponent(option2Input.value)}`;
+
+        // Copy link to clipboard
+        copyLinkButton.addEventListener('click', function() {
+            navigator.clipboard.writeText(shareUrl).then(function() {
+                alert('Link copied to clipboard!');
+            }, function(err) {
+                alert('Failed to copy: ', err);
+            });
+        });
+
+        // WhatsApp share
+        whatsappShare.href = `https://wa.me/?text=${encodeURIComponent('Check out this Decision Game: ' + shareUrl)}`;
+
+        // Email share
+        emailShare.href = `mailto:?subject=Decision Game&body=Check out this Decision Game: ${shareUrl}`;
+    }
+
+    function makeSelection() {
+        // Stop the timer
+        clearInterval(countdownInterval);
+        clockAudio.pause();
+        clockAudio.currentTime = 0;
+
+        // Play select audio
+        selectAudio.play();
+
+        // Disable option buttons
+        const buttons = optionsContainer.querySelectorAll('button');
+        buttons.forEach(function(button) {
+            button.disabled = true;
+        });
+
+        // Show reset button
+        resetButton.style.display = 'inline-block';
+    }
+
+    resetButton.addEventListener('click', function() {
+        // Reset the game
+        location.reload();
     });
-}
-
-function selectOption(selectedInput) {
-    document.getElementById("decision").innerText = `Chosen: ${selectedInput}`;
-    clearInterval(countdownInterval);
-    document.getElementById("timerGif").style.display = "none"; // Hide the GIF
-    restartApp();
-}
-
-function restartApp() {
-    document.getElementById("input1").value = "";
-    document.getElementById("input2").value = "";
-    document.getElementById("box-container").innerHTML = "";
-    document.getElementById("timer").innerText = "";
-    document.getElementById("decision").innerText = "";
-}
+});

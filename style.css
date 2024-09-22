@@ -9,17 +9,17 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(90deg, #1e3c72, #2a5298);
     color: #fff;
-    width: 100%;
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensure full viewport height */
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #game-container {
     max-width: 100%;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensure container fills viewport height */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 10px;
 }
@@ -28,14 +28,24 @@ h1 {
     font-size: 2.5rem; /* Largest text on the page */
     margin-bottom: 20px;
     text-align: center;
+    flex-shrink: 0; /* Prevent title from shrinking */
 }
 
-/* Input Container */
+#content-container {
+    width: 100%;
+    flex-grow: 1; /* Allow content to grow and take available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #input-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 #inputs {
@@ -57,7 +67,6 @@ h1 {
     white-space: nowrap; /* Prevent text wrapping */
 }
 
-/* Decide Button */
 #decide-button {
     padding: 15px 30px;
     font-size: 1.2rem; /* Appropriately sized */
@@ -76,12 +85,12 @@ h1 {
     background-color: #eb6b4d;
 }
 
-/* Share Container */
 #share-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 #share-container button,
@@ -138,14 +147,12 @@ h1 {
     background-color: #eb6b4d;
 }
 
-/* Timer Container */
 #timer-container {
     font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* Options Container */
 #options-container {
     display: flex;
     flex-direction: row;
@@ -170,7 +177,7 @@ h1 {
 
 /* First Option Button */
 #options-container button:first-child {
-    background-color: #ff8c00;
+    background-color: #ff8c00; /* Dark Orange */
 }
 
 #options-container button:first-child:hover {
@@ -179,7 +186,7 @@ h1 {
 
 /* Second Option Button */
 #options-container button:last-child {
-    background-color: #32cd32;
+    background-color: #32cd32; /* Lime Green */
 }
 
 #options-container button:last-child:hover {
@@ -203,6 +210,7 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 #buttons-container button {
@@ -217,7 +225,7 @@ h1 {
     width: 40%;
     max-width: 150px;
     text-align: center;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
 }
 
 #buttons-container button:hover {
@@ -255,8 +263,8 @@ h1 {
     #share-container button,
     #share-container a {
         width: 80%;
-        font-size: 1rem;
         margin: 5px 0;
+        text-align: center;
     }
 
     #instructions-text,

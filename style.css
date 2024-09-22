@@ -1,5 +1,3 @@
-/* style.css */
-
 /* Reset margins and paddings */
 * {
     margin: 0;
@@ -11,14 +9,14 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(90deg, #1e3c72, #2a5298);
     color: #fff;
-    overflow: hidden; /* Prevent scrolling */
     width: 100%;
-    height: 100vh; /* Set body height to viewport height */
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #game-container {
     max-width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,19 +25,12 @@ body {
 }
 
 h1 {
-    font-size: 8vw; /* Responsive font size */
+    font-size: 2.5rem; /* Largest text on the page */
     margin-bottom: 20px;
     text-align: center;
-    line-height: 1.2;
 }
 
-/* Set a maximum font size for larger screens */
-@media screen and (min-width: 600px) {
-    h1 {
-        font-size: 4vw;
-    }
-}
-
+/* Input Container */
 #input-container {
     width: 100%;
     display: flex;
@@ -57,17 +48,19 @@ h1 {
 #inputs input {
     width: 40%;
     padding: 10px;
-    font-size: 4vw; /* Responsive font size */
+    font-size: 1rem; /* Smaller than title */
     border: none;
     border-radius: 30px;
     background-color: #f0f0f0;
     color: #333;
     text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
+/* Decide Button */
 #decide-button {
     padding: 15px 30px;
-    font-size: 5vw; /* Responsive font size */
+    font-size: 1.2rem; /* Appropriately sized */
     background-color: #ff7e5f;
     border: none;
     border-radius: 30px;
@@ -76,12 +69,14 @@ h1 {
     margin-bottom: 20px;
     width: 80%;
     max-width: 300px;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 #decide-button:hover {
     background-color: #eb6b4d;
 }
 
+/* Share Container */
 #share-container {
     display: flex;
     flex-direction: row;
@@ -92,7 +87,7 @@ h1 {
 #share-container button,
 #share-container a {
     padding: 10px 20px;
-    font-size: 4vw; /* Responsive font size */
+    font-size: 1rem;
     background-color: #24c6dc;
     border: none;
     border-radius: 20px;
@@ -100,6 +95,7 @@ h1 {
     color: #fff;
     margin: 5px;
     text-decoration: none;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 #share-container button:hover,
@@ -110,7 +106,7 @@ h1 {
 #error-message {
     color: #ff6b6b;
     margin-bottom: 20px;
-    font-size: 4vw; /* Responsive font size */
+    font-size: 1rem;
     text-align: center;
 }
 
@@ -120,14 +116,14 @@ h1 {
 }
 
 #instructions-text {
-    font-size: 4vw; /* Responsive font size */
+    font-size: 1.2rem; /* Clear and readable */
     margin-bottom: 20px;
     line-height: 1.5;
 }
 
 #start-button {
     padding: 15px 30px;
-    font-size: 5vw; /* Responsive font size */
+    font-size: 1.2rem;
     background-color: #ff7e5f;
     border: none;
     border-radius: 30px;
@@ -135,18 +131,21 @@ h1 {
     color: #fff;
     width: 80%;
     max-width: 300px;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 #start-button:hover {
     background-color: #eb6b4d;
 }
 
+/* Timer Container */
 #timer-container {
-    font-size: 5vw; /* Responsive font size */
+    font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
 }
 
+/* Options Container */
 #options-container {
     display: flex;
     flex-direction: row;
@@ -158,7 +157,7 @@ h1 {
 #options-container button {
     padding: 15px 10px;
     margin: 10px;
-    font-size: 4vw; /* Responsive font size */
+    font-size: 1rem;
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -166,8 +165,10 @@ h1 {
     width: 40%;
     max-width: 150px;
     text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
+/* First Option Button */
 #options-container button:first-child {
     background-color: #ff8c00;
 }
@@ -176,6 +177,7 @@ h1 {
     background-color: #e07b00;
 }
 
+/* Second Option Button */
 #options-container button:last-child {
     background-color: #32cd32;
 }
@@ -192,7 +194,7 @@ h1 {
 
 #message-container {
     margin-top: 20px;
-    font-size: 5vw; /* Responsive font size */
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -205,7 +207,7 @@ h1 {
 
 #buttons-container button {
     padding: 10px 25px;
-    font-size: 4vw; /* Responsive font size */
+    font-size: 1rem;
     background-color: #ff7e5f;
     border: none;
     border-radius: 30px;
@@ -215,60 +217,74 @@ h1 {
     width: 40%;
     max-width: 150px;
     text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 #buttons-container button:hover {
     background-color: #eb6b4d;
 }
 
+/* Responsive adjustments for smaller screens */
 @media screen and (max-width: 600px) {
-    /* Adjust font sizes and element sizes for mobile */
     h1 {
-        font-size: 6vw;
+        font-size: 2rem; /* Slightly smaller on mobile */
+    }
+
+    #inputs {
+        flex-direction: column;
+        align-items: center;
     }
 
     #inputs input {
         width: 80%;
         margin: 10px 0;
-        font-size: 6vw;
+        font-size: 1.2rem;
     }
 
     #decide-button,
     #start-button {
         width: 80%;
-        font-size: 6vw;
+        font-size: 1.2rem;
+    }
+
+    #share-container {
+        flex-direction: column;
+        align-items: center;
     }
 
     #share-container button,
     #share-container a {
         width: 80%;
-        font-size: 5vw;
+        font-size: 1rem;
+        margin: 5px 0;
     }
 
     #instructions-text,
     #error-message,
     #timer-container,
     #message-container {
-        font-size: 5vw;
+        font-size: 1.2rem;
     }
 
     #options-container {
         flex-direction: column;
+        align-items: center;
     }
 
     #options-container button {
         width: 80%;
         margin: 10px 0;
-        font-size: 5vw;
+        font-size: 1.2rem;
     }
 
     #buttons-container {
         flex-direction: column;
+        align-items: center;
     }
 
     #buttons-container button {
         width: 80%;
         margin: 10px 0;
-        font-size: 5vw;
+        font-size: 1.2rem;
     }
 }

@@ -130,11 +130,11 @@ h1 {
     align-items: center;
 }
 
+/* Option Buttons Styling */
 #options-container button {
     padding: 15px 30px;
     margin: 10px;
     font-size: 1.2em;
-    background-color: #ff6b6b; /* Contrasting color */
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -142,8 +142,22 @@ h1 {
     width: 40%;
 }
 
-#options-container button:hover {
-    background-color: #ee5a5a;
+/* First Option Button */
+#options-container button:first-child {
+    background-color: #ff8c00; /* Dark Orange */
+}
+
+#options-container button:first-child:hover {
+    background-color: #e07b00;
+}
+
+/* Second Option Button */
+#options-container button:last-child {
+    background-color: #32cd32; /* Lime Green */
+}
+
+#options-container button:last-child:hover {
+    background-color: #28b428;
 }
 
 #kot-container img {

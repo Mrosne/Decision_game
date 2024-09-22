@@ -16,8 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const copyLinkButton = document.getElementById('copy-link');
     const whatsappShare = document.getElementById('whatsapp-share');
     const emailShare = document.getElementById('email-share');
+    const messageContainer = document.getElementById('message-container');
 
     let countdownInterval;
+
+    const baseUrl = 'https://mrosne.github.io/Decision_game/';
 
     // Parse URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -27,7 +30,38 @@ document.addEventListener('DOMContentLoaded', function() {
     if (paramOption1 && paramOption2) {
         option1Input.value = paramOption1;
         option2Input.value = paramOption2;
+        checkInputs();
         startGame();
+    }
+
+    // Check inputs on every input event
+    option1Input.addEventListener('input', checkInputs);
+    option2Input.addEventListener('input', checkInputs);
+
+    function checkInputs() {
+        if (option1Input.value.trim() !== '' && option2Input.value.trim() !== '') {
+            shareContainer.style.display = 'block';
+
+            // Prepare share link
+            const shareUrl = `${baseUrl}?option1=${encodeURIComponent(option1Input.value)}&option2=${encodeURIComponent(option2Input.value)}`;
+
+            // Update copy link button
+            copyLinkButton.onclick = function() {
+                navigator.clipboard.writeText(shareUrl).then(function() {
+                    alert('Link copied to clipboard!');
+                }, function(err) {
+                    alert('Failed to copy: ', err);
+                });
+            };
+
+            // WhatsApp share
+            whatsappShare.href = `https://wa.me/?text=${encodeURIComponent('Check out this Decision Game: ' + shareUrl)}`;
+
+            // Email share
+            emailShare.href = `mailto:?subject=Decision Game&body=Check out this Decision Game: ${shareUrl}`;
+        } else {
+            shareContainer.style.display = 'none';
+        }
     }
 
     decideButton.addEventListener('click', function() {
@@ -44,15 +78,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('input-container').style.display = 'none';
         decideButton.style.display = 'none';
 
-        // Show share container
-        shareContainer.style.display = 'block';
+        // Hide share container
+        shareContainer.style.display = 'none';
 
         // Show timer
         timerContainer.style.display = 'block';
         timerSpan.textContent = '10';
 
         // Play clock audio
-        clockAudio.play();
+        clockAudio.play().catch(function(error) {
+            console.log('Audio playback failed:', error);
+        });
 
         // Start countdown
         let timeLeft = 10;
@@ -63,7 +99,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(countdownInterval);
                 clockAudio.pause();
                 clockAudio.currentTime = 0;
-                // Time's up, you can handle this if needed
+
+                // Hide the gif
+                kotContainer.innerHTML = '';
+
+                // Display sad message
+                messageContainer.innerHTML = '<h2>Time\'s up! No decision was made.</h2>';
+
+                // Disable option buttons
+                const buttons = optionsContainer.querySelectorAll('button');
+                buttons.forEach(function(button) {
+                    button.disabled = true;
+                });
+
+                // Show reset button
+                resetButton.style.display = 'inline-block';
             }
         }, 1000);
 
@@ -84,25 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add event listeners to options
         option1Button.addEventListener('click', makeSelection);
         option2Button.addEventListener('click', makeSelection);
-
-        // Prepare share link
-        const baseUrl = 'https://mrosne.github.io/Decision_game/';
-        const shareUrl = `${baseUrl}?option1=${encodeURIComponent(option1Input.value)}&option2=${encodeURIComponent(option2Input.value)}`;
-
-        // Copy link to clipboard
-        copyLinkButton.addEventListener('click', function() {
-            navigator.clipboard.writeText(shareUrl).then(function() {
-                alert('Link copied to clipboard!');
-            }, function(err) {
-                alert('Failed to copy: ', err);
-            });
-        });
-
-        // WhatsApp share
-        whatsappShare.href = `https://wa.me/?text=${encodeURIComponent('Check out this Decision Game: ' + shareUrl)}`;
-
-        // Email share
-        emailShare.href = `mailto:?subject=Decision Game&body=Check out this Decision Game: ${shareUrl}`;
     }
 
     function makeSelection() {
@@ -120,6 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
             button.disabled = true;
         });
 
+        // Hide the gif
+        kotContainer.innerHTML = '';
+
+        // Display congratulations message
+        messageContainer.innerHTML = '<h2>Congratulations on making a decision!</h2>';
+
         // Show reset button
         resetButton.style.display = 'inline-block';
     }
@@ -128,4 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reset the game
         location.reload();
     });
+
+    // Initial check to display share options if inputs are pre-filled
+    checkInputs();
 });

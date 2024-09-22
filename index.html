@@ -1,27 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>String Decision App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Decision Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <h1>Choose Between Two Strings</h1>
-    <div class="input-container">
-        <input type="text" id="input1" placeholder="Enter first option" />
+    <div id="game-container">
+        <h1>Decision Game</h1>
+        <div id="input-container">
+            <input type="text" id="option1" placeholder="Enter first option">
+            <input type="text" id="option2" placeholder="Enter second option">
+            <button id="decide-button">Decide!</button>
+        </div>
+        <div id="error-message"></div>
+        <div id="timer-container" style="display: none;">
+            <span id="timer">10</span> seconds left
+        </div>
+        <div id="options-container">
+            <!-- Option buttons will appear here -->
+        </div>
+        <div id="kot-container">
+            <!-- kot.gif will be displayed here -->
+        </div>
+        <div id="share-container" style="display: none;">
+            <button id="copy-link">Copy Link</button>
+            <a href="#" id="whatsapp-share">Share on WhatsApp</a>
+            <a href="#" id="email-share">Share via Email</a>
+        </div>
+        <button id="reset-button" style="display: none;">Reset</button>
     </div>
-    <div class="input-container">
-        <input type="text" id="input2" placeholder="Enter second option" />
-    </div>
-    <button id="decideBtn">Decide!</button>
-    <button id="shareBtn">Share URL</button>
 
-    <div id="box-container" class="box-container"></div>
-    <div class="decision" id="decision"></div>
-    <div id="timer" class="timer"></div>
+    <!-- Audio files -->
+    <audio id="clock-audio" src="clock.wav"></audio>
+    <audio id="select-audio" src="select.wav"></audio>
 
- <!-- Replace video with an img element for the GIF -->
-    <img id="timerGif" src="kot.gif" alt="Timer GIF" style="display:none;" />
-
+    <!-- JavaScript file -->
     <script src="script.js"></script>
 </body>
+</html>
